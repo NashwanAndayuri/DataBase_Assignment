@@ -1,0 +1,197 @@
+% beamerthemeUGM2025.sty
+% Beamer Theme UGM 2025
+% Penggunaan: \usepackage{beamerthemeUGM2025}
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerUGM}[2025/01/01 Beamer Theme UGM 2025]
+
+% =========================================================
+% Dependencies
+% =========================================================
+\RequirePackage{xcolor}
+\RequirePackage{graphicx}
+\RequirePackage{tikz}
+\RequirePackage{pgfpages}
+\RequirePackage{listings}
+\RequirePackage{hyperref}
+\RequirePackage{multirow}
+\RequirePackage{fancyhdr}
+\RequirePackage{lastpage}
+\RequirePackage{verbatim}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{lmodern}
+\RequirePackage{subfigure}
+\RequirePackage{enumerate}
+\RequirePackage{sidecap}
+\RequirePackage{wrapfig}
+\RequirePackage{multicol}
+\RequirePackage{ragged2e}
+\RequirePackage{booktabs}
+\RequirePackage[english]{babel}
+\RequirePackage[table]{xcolor}
+\usetikzlibrary{shapes,arrows,positioning,calc,arrows.meta}
+
+% =========================================================
+% Input encoding & hyperref
+% =========================================================
+\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+\setbeamercovered{transparent}
+
+% =========================================================
+% Custom colors
+% =========================================================
+\definecolor{ag}{rgb}{0.55, 0.71, 0.0}
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+% Warna UGM
+\definecolor{ugmyellow}{HTML}{f6d648}
+\definecolor{ugmblue}{HTML}{194168}
+\definecolor{ugmbackgroundblue}{HTML}{00416B}
+\definecolor{ugmgray}{HTML}{E0E0E0}
+\definecolor{ugmbackgroundgrey}{RGB}{220, 220, 220}
+
+% =========================================================
+% Custom commands (text coloring)
+% =========================================================
+\newcommand{\teksmerah}[1]{{\color{red} #1}}
+\newcommand{\teksbiru}[1]{{\color{blue} #1}}
+\newcommand{\tekshijau}[1]{{\color{ag} #1}}
+\newcommand{\tebalmerah}[1]{{\bfseries\color{red} #1}}
+\newcommand{\tebalbiru}[1]{{\bfseries\color{blue} #1}}
+\newcommand{\tebalhijau}[1]{{\bfseries\color{ag} #1}}
+\newcommand{\kodependek}[1]{{\teksbiru{\texttt{#1}}}}
+\newcommand{\kodemerah}[1]{{\teksmerah{\texttt{#1}}}}
+
+\renewcommand{\figurename}{Gambar}
+
+% =========================================================
+% Frame khusus: \frontframe dan \quoteframe
+% =========================================================
+\newcommand{\frontframe}{%
+{%
+\usebackgroundtemplate{%
+\begin{tikzpicture}[remember picture,overlay]
+    \node[opacity=.6, anchor=west, inner sep=0pt]
+        at ([xshift=0.25cm]current page.west) {
+       \includegraphics[height=.9\paperheight]{../themeUGM/depanSlideUGM.png}
+    };
+\end{tikzpicture}
+}
+\setbeamertemplate{headline}{}
+\begin{frame}
+    \maketitle
+\end{frame}
+}%
+}
+
+\newcommand{\quoteframe}[2]{%
+{%
+\usebackgroundtemplate{%
+\begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=east, opacity=0.5, inner sep=0pt]
+        at (current page.east) {
+        \includegraphics[height=.95\paperheight]{../themeUGM/quoteImageUGM.png}
+    };
+\end{tikzpicture}
+}
+\setbeamertemplate{headline}{}
+
+\begin{frame}
+  \vfill
+  \vspace{3cm}
+
+    \begin{minipage}{0.5\textwidth}
+      \centering
+      {\Large\itshape
+        #1\par}
+      \vspace{1.5em}
+      {\large\bfseries\color{ugmblue} --- #2 ---\par}
+    \end{minipage}
+\end{frame}
+}%
+}
+
+% =========================================================
+% Frametitle template
+% =========================================================
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1.125ex,leftskip=0.5cm]{frametitle}%
+    \insertframetitle%
+  \end{beamercolorbox}%
+}
+
+% =========================================================
+% Font theme
+% =========================================================
+\usefonttheme{professionalfonts}
+\setbeamerfont{title}{series=\bfseries,parent=structure}
+\setbeamerfont{frametitle}{series=\bfseries,parent=structure}
+
+% =========================================================
+% Article mode
+% =========================================================
+\mode<article>
+{
+  \RequirePackage{fullpage}
+  \RequirePackage{hyperref}
+}
+
+% =========================================================
+% Presentation mode: logo UGM di kanan atas
+% =========================================================
+\mode<presentation>
+{
+  \addtobeamertemplate{frametitle}{}{%
+    \begin{tikzpicture}[remember picture,overlay]
+      \node[anchor=north east,xshift=-0.3cm,yshift=-0.1cm]
+        at (current page.north east)
+        {\includegraphics[height=.75cm]{../themeUGM/ugm-horizontal-blue.png}};
+    \end{tikzpicture}%
+  }
+}
+
+% =========================================================
+% Tema & warna Beamer
+% =========================================================
+\usetheme{Copenhagen}
+\usecolortheme{seahorse}
+\setbeamercolor{title}{bg=ugmgray, fg=ugmblue}
+\setbeamercolor{frametitle}{bg=white, fg=ugmblue}
+\setbeamercolor{section in head/foot}{fg=white, bg=ugmblue}
+\setbeamercolor{subsection in head/foot}{fg=black, bg=ugmgray}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+% Regular block
+\setbeamercolor{block title}{fg=white, bg=ugmblue}
+\setbeamercolor{block body}{fg=black, bg=ugmblue!8}
+
+% =========================================================
+% Footline
+% =========================================================
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox{%
+    % Kolom 1: 50% - abu-abu dengan teks UGM biru
+    \colorbox{ugmgray}{\makebox[.50\paperwidth][l]{%
+      \color{ugmblue}\hspace{2ex}\usebeamerfont{author in head/foot}%
+      \textbf{Merakyat, Mandiri, Berkelanjutan $|$ Inclusive, Self-Reliant, Sustainable}%
+    }}%
+    % Kolom 2: 15% - biru background, teks putih
+    \colorbox{ugmbackgroundblue}{\makebox[.15\paperwidth][c]{%
+      \color{white}\usebeamerfont{title in head/foot}%
+      \textbf{ugm.ac.id}%
+    }}%
+    
+     \colorbox{ugmgray}{\makebox[.40\paperwidth][l]{
+  \color{black}\usebeamerfont{date in head/foot}%
+  \textbf{\hspace{2ex}\insertshorttitle\ (\insertframenumber/\inserttotalframenumber)}%
+}}
+  }%
+  \vskip0pt%
+}
+
+\endinput

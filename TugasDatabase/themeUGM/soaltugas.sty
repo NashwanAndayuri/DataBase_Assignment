@@ -1,0 +1,111 @@
+% change this to adapt the header
+% -----------------------------------------------------------------------
+
+\ProvidesPackage{soaltugas}[16/02/2022 v1.0 custom anu student assignment stylefile]
+
+% Options
+\RequirePackage{tcolorbox}
+\RequirePackage{environ}
+
+\newcommand{\module}{Module}
+\newcommand{\university}{Universitas Gadjah Mada}
+\newcommand{\facultyname}{}
+\newcommand{\deptname}{}
+\newcommand{\term}{}
+\newcommand{\coursename}{}
+
+\newcommand{\setmodule}[1]{\renewcommand{\module}{#1}}
+\newcommand{\setuniversity}[1]{\renewcommand{\university}{#1}}
+\newcommand{\setfacultyname}[1]{\renewcommand{\facultyname}{#1}}
+\newcommand{\setdepartment}[1]{\renewcommand{\deptname}{#1}}
+\newcommand{\setterm}[1]{\renewcommand{\term}{#1}}
+\newcommand{\setcoursename}[1]{\renewcommand{\coursename}{#1}}
+\newcommand{\setdeptname}[1]{\renewcommand{\deptname}{#1}}
+
+% -----------------------------------------------------------------------
+% Paper formatting
+% -----------------------------------------------------------------------
+
+% Standardkommandos in LaTeX2e
+\def\ensuremath#1{\relax\ifmmode #1\else $#1$\fi}
+
+\parindent 0pt
+\parskip   1ex plus 0.3ex minus 0.3ex
+%\parskip   6pt plus 2pt minus 2pt
+
+%\textheight 23.9cm
+\textheight 23.9cm
+\textwidth  16cm
+\topmargin  -2cm
+\leftmargin -1cm
+\advance\hsize by 2truecm\hoffset = -1.5truecm
+
+\frenchspacing
+\sloppy
+
+% -----------------------------------------------------------------------
+% Environments for formatting
+% -----------------------------------------------------------------------
+
+\usepackage{mdframed}
+\usepackage{etoolbox}
+
+\newcommand{\header}{%
+\MakeUppercase{
+    {\bf \university} \hfill \textsc{\term}  \\
+    {\bf \facultyname} \hfill \textsc{\@title}  \\
+    {\bf \deptname} \hfill {\textsc{\coursename}} \\
+    }
+    \hrule
+    \begin{tcolorbox}
+       \begin{center}
+            \MakeUppercase{{\bf{\large\module}}}
+        \end{center} 
+    \end{tcolorbox}    
+    }
+
+\newenvironment{answer}[1][]{
+        \par \medskip
+        {\textbf{Answer to #1}}
+        \par
+        \begin{mdframed}[backgroundcolor=gray!10!white]
+    }
+    {
+        \end{mdframed}
+    }
+
+    \definecolor{ugmblue}{RGB}{0, 56, 101}
+\definecolor{ugmgold}{RGB}{197, 155, 22}
+\definecolor{lightgray}{RGB}{245, 245, 245}
+\definecolor{sectionblue}{RGB}{0, 80, 140}
+\definecolor{notegreen}{RGB}{34, 120, 60}
+\definecolor{warnorange}{RGB}{200, 90, 0}
+\tcbuselibrary{skins, breakable}
+
+\newtcolorbox{infobox}[1]{
+  colback=lightgray, colframe=ugmblue,
+  fonttitle=\bfseries\color{white},
+  coltitle=white, colbacktitle=ugmblue,
+  title=#1, rounded corners, breakable
+}
+
+\newtcolorbox{warnbox}[1]{
+  colback=red!10, colframe=warnorange,
+  fonttitle=\bfseries,
+  coltitle=white, colbacktitle=red!65,
+  title=#1, rounded corners, breakable
+}
+
+\newtcolorbox{deliverablebox}[1]{
+  colback=green!5, colframe=notegreen,
+  fonttitle=\bfseries,
+  coltitle=white, colbacktitle=notegreen,
+  title=#1, rounded corners, breakable
+}
+
+\newtcolorbox{conceptbox}[1]{
+  colback=cyan!3, colframe=blue,
+  fonttitle=\bfseries,
+  coltitle=white, colbacktitle=cyan,
+  title=#1, rounded corners, breakable
+}

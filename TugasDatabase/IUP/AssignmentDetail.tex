@@ -1,0 +1,82 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{../themeUGM/soaltugas}
+\usepackage[T1]{fontenc}
+\usepackage{tgbonum}
+\usepackage{hyperref}
+% Metadata
+\date{\today}
+\setmodule{Relational Model and Its Queries}
+\setterm{Semester 1, 2026}
+
+%-------------------------------%
+% Other details
+% TODO: Fill these
+%-------------------------------%
+\title{Group Assignment: I}
+\setfacultyname{Faculty of Mathematics and Natural Sciences}
+\setdeptname{Computer Science Undergraduate Program}
+\setcoursename{Database}
+
+%-------------------------------%
+% Add / Delete commands and packages
+% TODO: Add / Delete here as you need
+%-------------------------------%
+\usepackage{amsmath,amssymb,bm}
+\newcommand{\tekskode}[1]{{\bf\large\texttt{#1}}}
+% Main document
+\begin{document}
+    % Add header
+    \header{}
+\fontfamily{qpl} \selectfont
+\begin{deliverablebox}{The assignment consists of four parts}
+  \begin{enumerate}
+    \itemsep0em
+    \item translating constraints and business processes into an ER diagram (\textit{Entity Relationship Diagram}). The proposal must be accompanied by an explanation of the ERD formation process
+     \item designing and proposing a relational database schema that conforms to the proposed ERD
+     \item If a query is given, proposing a representation of the query in relational algebra expressions
+     \item Proposing solutions to the questions in the form of SQL queries. If there is more than one possible query (with different operations or clauses), alternative queries must also be written.
+\end{enumerate}  
+\end{deliverablebox}
+
+\begin{infobox}{Assignment Rules}
+\begin{enumerate}
+    \itemsep0em
+     \item The work may be done in groups with a maximum of \textbf{4 members}.
+     \item Each group member \textbf{must} contribute adequately and master the material produced by the group.
+     \item The work must be presented in a \textit{clear, complete, and neat manner, including the use of formal language that is easy to understand}
+     \item The work must be based on the team members' own thinking and agreed upon by all members
+\end{enumerate}  
+\end{infobox}
+\begin{warnbox}{Work Instructions}
+\begin{enumerate}
+    \itemsep0em
+    \item The assignment must be done using the \LaTeX\ text processor with the template provided in this assignment
+    \item How to use the \LaTeX\ Template:
+    \begin{enumerate}
+    \itemsep0em
+     \item The template can be run on \textbf{offline} or \textbf{online} platforms.
+     \item For offline platforms, you may use \textit{tools} such as Windows with \textbf{MikTeX}, Linux with \textbf{TeXLive}, or Mac with \textbf{MacTeX}
+     \item For online platforms, you may use the following services:
+     \begin{itemize}
+         \item \href{https://www.overleaf.com/}{Overleaf}
+         \item \href{https://www.texpage.com/}{TexPage}
+     \end{itemize}
+     To do so, create a new project, then select the \textbf{Existing Project} feature (on Overleaf), or \textbf{Upload Project} (on TexPage)
+     \item Those of you in the IUP class can view the assignment details by running/compiling the \tekskode{AssignmentTemplate.tex} file in the \tekskode{IUP} folder.
+     
+     Those of you in the non-IUP class can compile the \tekskode{TemplateTugas.tex} file in the \tekskode{Non IUP} folder
+     \item Answers to the assignment questions \textbf{ALL} must be placed in the \tekskode{assignmentanswers.tex} file (for IUP) or \tekskode{jawaban.tex} (for non-IUP)
+    \end{enumerate}
+     \item The work must be submitted as a PDF file compiled from the given LaTeX code. The LaTeX code (project in ZIP format) must also be attached.
+     \item The assignment must be submitted no later than
+     \begin{tcolorbox}
+     \center
+     \tekskode{October 12, 2026 at 11.00 WIB}    
+     \end{tcolorbox}
+     \textbf{Late submissions will be rejected by the system and will not be facilitated for submission via other platforms (email, chat, WhatsApp, etc.)}
+     \item EACH group member must submit the assignment individually (not only a group representative).
+     \item Every assignment submission MUST include the complete and clear identities of the group members
+     \item Submission via Google Classroom must be accompanied by pressing the \textbf{Submit} button and obtaining delivery/feedback information from the system.
+\end{enumerate}
+\end{warnbox}
+\end{document}

@@ -1,0 +1,169 @@
+\chapter{Guidelines and Assignment Format}
+\begin{warnbox}{Academic Integrity}
+\begin{center}
+  All work submitted must be the result of the student's own thinking and work.
+  Copying code or reports from other sources without clear attribution
+  is a violation of academic integrity and will be subject to action in accordance
+  with university regulations.
+  \end{center}
+\end{warnbox}
+\section{Assignment Guidelines}
+The assignment concerns the Relational Model and Queries on the Relational Model:
+\begin{itemize}
+    \itemsep0em
+     \item Relational Algebra
+     \item \textit{Structured Query Language (SQL})
+\end{itemize}
+
+The assignment answers are packaged in one chapter (chapter 2), whose sections have been provided in this template. The content of that chapter may be expanded as needed, but not reduced.
+
+\begin{deliverablebox}{The assignment consists of four parts}
+  \begin{enumerate}
+    \itemsep0em
+    \item Translate business requirements and processes into an ER diagram (\textit{Entity-Relationship Diagram}). The proposal must include an explanation of the ERD creation process
+     \item Design and propose a relational database schema that aligns with the proposed ERD
+     \item Given a query, propose a representation of the query in relational algebraic expressions.
+     \item Propose a solution to the problem in the form of an SQL queries. If there are more than one possible query (with different operations or clauses), alternative queries must also be provided
+\end{enumerate}
+\end{deliverablebox}
+
+Translated with DeepL.com (free version)
+
+\begin{infobox}{Assignment Conditions}
+\begin{enumerate}
+    \itemsep0em
+     \item The work may be done in groups with a maximum of 4 members.
+     \item Each group member \textbf{must} contribute adequately, and master the material produced by their group.
+     \item The work must be presented \textit{clearly, completely, and neatly, including the use of formal language that is easy to understand}
+     \item The work must come from the team members' own thinking, and be agreed upon by all members
+\end{enumerate}  
+\end{infobox}
+
+\section{Assignment Content Details}
+\subsection{Case Domain}
+It is desired to manage the academic data of a university with the following constraints:
+\begin{infobox}{Process Constraints}
+    \begin{itemize}
+        \itemsep0em
+     \item Every academic activity needs to be recorded transparently and preserve chronology/history
+     \item The data storage design accommodates the following matters and processes:
+     \begin{itemize}
+         \itemsep0em \small
+         \item A student is allowed to retake a course without any limit on the number of times
+         \item The course grade (if retaken) used for the transcript is the \textbf{grade from the last attempt}
+         \item Courses are either \textsc{Compulsory} or \textsc{Elective}.
+         \item A course may have other courses as prerequisites
+          \item A lecturer may teach a course in a semester in more than one class (parallel)
+         \item Some courses may be offered in even or odd semesters
+         \item A class for a course is taught entirely by one lecturer (not team teaching)
+         \item The course grades and weights given are
+         \begin{center}
+         \begin{multicols}{2}
+            \begin{tabular}{c|c}
+             Grade & Weight \\ \hline
+           A   & 4.00 \\
+            A-  & 3.75 \\
+            A/B & 3.50 \\
+            B+ & 3.25 \\
+            B & 3.00 \\ 
+            B-  & 2.75 \\
+         \end{tabular}  
+         \columnbreak
+         \begin{tabular}{c|c}
+             Grade & Weight \\ \hline
+            B/C  & 2.50 \\
+            C+ & 2.25 \\
+            C & 2 \\
+            C/D & 2.5 \\
+            D & 1.00 \\ 
+             D & 0.00 \\ 
+         \end{tabular} 
+         \end{multicols}
+         \end{center}
+         \item The formula for calculating GPA from $n$ courses is:
+         \[GPA = \frac{\sum_{i=1}^{n}{{\text{credits}}_i.{\text{weight}}_i}}{\sum_{i=1}^{n}{{\text{credits}}_i}}\]
+     \end{itemize}
+    \end{itemize}
+\end{infobox}
+
+\subsection{Output/Outcome of the Assignment}
+The following are some \textbf{minimal} output/outcome to be addressed.
+
+\begin{deliverablebox}
+    \begin{enumerate}
+        \itemsep0em
+     \item An E-R diagram (ERD) that matches the points above! (starting from identification: entities, relations, cardinalities, etc.)
+     \item A complete schema of the database tables that matches the ERD created; for example in the form \newline \texttt{Student(nim, name, gender, studyProgram,\dots) \newline Lecturer(nip, \dots)}
+     
+     And \textbf{also SQL DDL commands} for defining the tables above (complete with all \textit{constraints})!
+     \item DML commands for the questions below:
+     \begin{enumerate}
+         \itemsep0em \footnotesize \bfseries
+         \item List of elective course names and the courses that are their prerequisites (only name and course code information is sufficient). Courses that do not have prerequisites should still be displayed!
+         \item List of elective courses taken by Computer Science students of the '2024' cohort in the odd semester of academic year 2026/2027!
+         \item List of favorite elective courses for Computer Science students, namely the three courses with the most enrollees in the last three years!
+         \item List of students who have a Semester Grade Point Average for the odd semester of 2025/2026 of no less than 3.25! (understand the difference between Semester GPA and Cumulative GPA)
+         \item List of students and the Cumulative GPA they have obtained to date! (courses that have been retaken only need to be counted once) 
+     \end{enumerate}
+     \item Relational algebra expression for each given query!
+    \end{enumerate}
+\end{deliverablebox}
+
+\vspace{.2cm}
+For each query above, the steps for working on it need to be described:
+\begin{enumerate}
+    \itemsep0em
+     \item identify the tables that need to be involved
+     \item determine the join criteria and join type: \textsc{inner join, natural join, left/right join} or \textsc{outer join}
+     \item Valid SQL commands. If a \textsc{VIEW} is needed as a temporary table, please also write it out in order.
+     \item if there is more than one \textit{equivalent} SQL query, it will be a bonus if you can also write that query!
+\end{enumerate}
+
+\section{Sample Problem and Its Solution}
+Suppose the following query is given:
+\begin{tcolorbox}{}
+\begin{quote}
+    \textit{Display the list of elective courses that have never been taken/attended by students}
+\end{quote}
+\end{tcolorbox}
+then an example answer is as follows:
+\begin{infobox}{Query number 1}
+    \begin{enumerate}
+        \itemsep0em \small
+         \item \textbf{Tables needed in the query:} \textsc{Course (Mk), CourseEnrollment (Pk)}
+         \item if using the SET DIFFERENCE operation there is no join process, so there is no join criterion. As an alternative, LEFT JOIN can be used, with the criterion \texttt{Mk.courseId= Pk.courseId} %\newpage
+         \item \textbf{The required query} 
+         \begin{lstlisting}[caption= SET DIFFERENCE approach]
+SELECT * FROM Course Mk WHERE (type='E') and courseId NOT IN 
+    (SELECT courseId FROM CourseEnrollment Pk)       
+         \end{lstlisting}
+         \item Equivalent SQL alternatives
+         \begin{lstlisting}[caption=Using LEFT JOIN]
+SELECT Mk.* FROM Course Mk LEFT JOIN CourseParticipant Pk ON (Mk.courseId=Pk.courseId) 
+    WHERE Mk.type='E' and Pk.courseId is NULL
+         \end{lstlisting}
+      \begin{lstlisting}[caption=Using EXISTS]
+SELECT * FROM Course Mk WHERE (type='E') and 
+    NOT EXISTS
+    (SELECT courseId FROM CourseEnrollment Pk 
+        WHERE Pk.courseId=Mk.courseId)       
+         \end{lstlisting}  
+ \item Proposed Relational algebra expression
+ 
+ \[
+\begin{array}{c}
+(\pi_{\text{courseId}}(\sigma_{\text{type='E'}}\left(\text{Course}) \right) - \\ \pi_{\text{courseId}}\left(\text{Course}\right))   \bowtie \text{Course}
+\end{array}
+ \]
+
+
+ \[
+ \begin{array}{c}
+DIFF1 \leftarrow \pi_{\text{courseId}}(\sigma_{\text{type='E'}}\left(\text{Course}) \right)\\
+ DIFF2 \leftarrow (DIFF1 - \pi_{\text{courseId}}\left(\text{Course}\right))  \\
+DIFF2 \bowtie \text{Course}
+ \end{array}
+ \]
+ 
+    \end{enumerate}
+\end{infobox}

@@ -1,0 +1,108 @@
+\chapter{Hasil dan Pembahasan}
+\begin{tcolorbox}[title=Daftar Anggota Kelompok]
+    \begin{enumerate}
+        \itemsep0em
+        \item Mhs 1, NIM: 
+        \item Mhs 2, NIM: 
+        \item Mhs 3, NIM:
+    \end{enumerate}
+\end{tcolorbox}
+\section{Entity Relationship Diagram}
+Dari analisa atas proses bisnis dan batasan yang diberikan, pada bagian ini dapat dijelaskan beberapa hal, diantaranya: \textit{mapping cardinality}, atribut dan kunci yang relevan, dsb.
+
+Diagram ER untuk Basis Data Akademik ditunjukkan pada Gambar \ref{gb:1}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=.45\linewidth]{logougm.png}
+    \caption{Skema ERD Basis Data Akademik}
+    \label{gb:1}
+\end{figure}
+\section{Skema Tabel-Tabel Dalam Basis Data}
+\begin{tcolorbox}[title=Skema Tabel dalam Basis Data Akademik]
+\begin{itemize}
+    \itemsep0em
+     \item \texttt{mahasiswa(\dots)}
+     \item \texttt{dosen(\dots)}
+     \item dst.
+\end{itemize}  
+\end{tcolorbox}
+\section{Pertanyaan Bisnis Dan Penyelesaian Dengan SQL}
+\subsection{Soal nomor 1}
+\begin{tcolorbox}
+  \textit{Daftar nama mata kuliah pilihan dan mata kuliah yang memprasyaratinya (cukup info nama dan kode matakuliah saja).  Matakuliah yang tidak memiliki prasyarat tetap ditampilkan!}  
+\end{tcolorbox}
+\begin{enumerate}
+    \itemsep0em
+    \item Tabel yang diperlukan untuk menjawab query:
+    \item Kiriteria join (bila ada)
+    \item Perintah SQL sesuai pertanyaan
+    \begin{lstlisting}
+SELECT 
+    FROM
+    \end{lstlisting}
+    \item Alternatif perintah SQL (bila ada) disertai penjelasan memadai
+\end{enumerate}
+
+\subsection{Soal nomor 2}
+\begin{tcolorbox}   
+Daftar Matakuliah pilihan yang diambil oleh mahasiswa Ilmu Komputer angkatan '2024' pada semester ganjil tahun akademik 2026/2027!
+\end{tcolorbox}
+\begin{enumerate}
+    \itemsep0em
+    \item Tabel yang diperlukan untuk menjawab query:
+    \item Kiriteria join (bila ada)
+    \item Perintah SQL sesuai pertanyaan
+    \begin{lstlisting}
+SELECT 
+    FROM
+    \end{lstlisting}
+    \item Alternatif perintah SQL (bila ada) disertai penjelasan memadai
+\end{enumerate}
+
+\subsection{Soal nomor 3}
+\begin{tcolorbox}
+    Daftar Matakuliah pilihan yang favorit untuk mahasiswa Ilmu Komputer, yaitu tiga matakuliah dengan pengambil terbanyak dalam tiga tahun terakhir!
+\end{tcolorbox}
+\begin{enumerate}
+    \itemsep0em
+    \item Tabel yang diperlukan untuk menjawab query:
+    \item Kiriteria join (bila ada)
+    \item Perintah SQL sesuai pertanyaan
+    \begin{lstlisting}
+SELECT 
+    FROM
+    \end{lstlisting}
+    \item Alternatif perintah SQL (bila ada) disertai penjelasan memadai
+\end{enumerate}
+
+\subsection{Soal nomor 4}
+\begin{tcolorbox}
+Daftar mahasiswa yang memiliki Indeks Prestasi Semester ganjil tahun 2025/2026 tidak kurang dari 3,25! (pahami perbedaan antara IP Semester dan IP Kumulatif)
+\end{tcolorbox}
+\begin{enumerate}
+    \itemsep0em
+    \item Tabel yang diperlukan untuk menjawab query:
+    \item Kiriteria join (bila ada)
+    \item Perintah SQL sesuai pertanyaan
+    \begin{lstlisting}
+SELECT 
+    FROM
+    \end{lstlisting}
+    \item Alternatif perintah SQL (bila ada) disertai penjelasan memadai
+\end{enumerate}
+
+\subsection{Soal nomor 5}
+\begin{tcolorbox}
+    Daftar mahasiswa dan IP Kumulatif yang diperolehnya saat ini! (matakuliah yang pernah diulang cukup dihitung sekali) 
+\end{tcolorbox}
+\begin{enumerate}
+    \itemsep0em
+    \item Tabel yang diperlukan untuk menjawab query:
+    \item Kiriteria join (bila ada)
+    \item Perintah SQL sesuai pertanyaan
+    \begin{lstlisting}
+SELECT 
+    FROM
+    \end{lstlisting}
+    \item Alternatif perintah SQL (bila ada) disertai penjelasan memadai
+\end{enumerate}

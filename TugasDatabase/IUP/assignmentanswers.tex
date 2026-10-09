@@ -1,0 +1,108 @@
+\chapter{Results and Discussion}
+\begin{tcolorbox}[title=Group Members]
+    \begin{enumerate}
+        \itemsep0em
+        \item Nashwan Hafid Andayuri, 25/554944/PA/23251
+        \item Mhs 2, NIM: 
+        \item Mhs 3, NIM:
+    \end{enumerate}
+\end{tcolorbox}
+\section{Entity Relationship Diagram}
+From the analysis of the business processes and the given constraints, this section can explain several things, including: \textit{cardinality mapping}, relevant attributes and keys, etc.
+
+The ER diagram for the Academic Database is shown in Figure \ref{gb:1}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=.35\linewidth]{logougm.png}
+    \caption{Logo UGM}
+    \label{gb:1}
+\end{figure}
+\section{Schema of Tables in the Database}
+\begin{tcolorbox}[title=Table Schema in the Academic Database]
+\begin{itemize}
+    \itemsep0em
+     \item \texttt{student(\dots)}
+     \item \texttt{lecturer(\dots)}
+      \item \texttt{course(\dots)}
+     \item etc.
+\end{itemize}  
+\end{tcolorbox}
+\section{Business Questions and Solutions Using SQL}
+\subsection{Question number 1}
+\begin{tcolorbox}
+  \textit{List of elective course names and the courses that are their prerequisites (only name and course code information is sufficient). Courses that do not have prerequisites should still be displayed!}  
+\end{tcolorbox}
+\begin{enumerate}
+    \itemsep0em
+    \item Tables needed to answer the query:
+    \item Join criteria (if any)
+    \item SQL command according to the question
+    \begin{lstlisting}
+SELECT * FROM course where type='E'
+    \end{lstlisting}
+    \item Alternative SQL commands (if any) with adequate explanation
+\end{enumerate}
+
+\subsection{Question number 2}
+\begin{tcolorbox}   
+List of elective courses taken by Computer Science students of the '2024' cohort in the odd semester of academic year 2026/2027!
+\end{tcolorbox}
+\begin{enumerate}
+    \itemsep0em
+    \item Tables needed to answer the query:
+    \item Join criteria (if any)
+    \item SQL command according to the question
+    \begin{lstlisting}
+SELECT 
+    FROM
+    \end{lstlisting}
+    \item Alternative SQL commands (if any) with adequate explanation
+\end{enumerate}
+
+\subsection{Question number 3}
+\begin{tcolorbox}
+    List of favorite elective courses for Computer Science students, namely the three courses with the most enrollees in the last three years!
+\end{tcolorbox}
+\begin{enumerate}
+    \itemsep0em
+    \item Tables needed to answer the query:
+    \item Join criteria (if any)
+    \item SQL command according to the question
+    \begin{lstlisting}
+SELECT 
+    FROM
+    \end{lstlisting}
+    \item Alternative SQL commands (if any) with adequate explanation
+\end{enumerate}
+
+\subsection{Question number 4}
+\begin{tcolorbox}
+List of students who have a Semester Grade Point Average for the odd semester of 2025/2026 of no less than 3.25! (understand the difference between Semester GPA and Cumulative GPA)
+\end{tcolorbox}
+\begin{enumerate}
+    \itemsep0em
+    \item Tables needed to answer the query:
+    \item Join criteria (if any)
+    \item SQL command according to the question
+    \begin{lstlisting}
+SELECT 
+    FROM
+    \end{lstlisting}
+    \item Alternative SQL commands (if any) with adequate explanation
+\end{enumerate}
+
+\subsection{Question number 5}
+\begin{tcolorbox}
+    List of students and the Cumulative GPA they have obtained to date! (courses that have been retaken only need to be counted once) 
+\end{tcolorbox}
+\begin{enumerate}
+    \itemsep0em
+    \item Tables needed to answer the query:
+    \item Join criteria (if any)
+    \item SQL command according to the question
+    \begin{lstlisting}
+SELECT 
+    FROM
+    \end{lstlisting}
+    \item Alternative SQL commands (if any) with adequate explanation
+\end{enumerate}
