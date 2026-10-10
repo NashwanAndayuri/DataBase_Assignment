@@ -13,18 +13,21 @@ From the analysis of the business processes and the given constraints, this sect
 The ER diagram for the Academic Database is shown in Figure \ref{gb:1}
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=.35\linewidth]{logougm.png}
-    \caption{Logo UGM}
+    \includegraphics[width=.85\linewidth]{ERD.png}
+    \caption{ER Diagram of the Academic Database}
     \label{gb:1}
 \end{figure}
 \section{Schema of Tables in the Database}
 \begin{tcolorbox}[title=Table Schema in the Academic Database]
 \begin{itemize}
     \itemsep0em
-     \item \texttt{student(\dots)}
-     \item \texttt{lecturer(\dots)}
-      \item \texttt{course(\dots)}
-     \item etc.
+     \item \texttt{student(nim, name, semester)}
+     \item \texttt{professor(prof id, name)}
+      \item \texttt{course(course id, period, type)}
+      \item \texttt{prerequisites(prerequisite, course id)}
+      \item \texttt{AvailableClasses(prof id, nim, class, course id, semester)}
+      \item \texttt{CourseGrades(course id, nim, pass period, credits, weight)}
+     
 \end{itemize}  
 \end{tcolorbox}
 \section{Business Questions and Solutions Using SQL}

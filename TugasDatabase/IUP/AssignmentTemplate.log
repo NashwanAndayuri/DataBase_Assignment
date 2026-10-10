@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.10.9)  9 OCT 2026 16:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.10.9)  10 OCT 2026 10:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1230,13 +1230,24 @@ File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 [3{C:/Users/LappyQ/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]
 [4] [5]) (assignmentanswers.tex [6]
 CHAPTER II.
-File: logougm.png Graphic file (type png)
-<use logougm.png>
-Package pdftex.def Info: logougm.png  used on input line 16.
-(pdftex.def)             Requested size: 142.40854pt x 144.59251pt.
+<ERD.png, id=190, 1326.9575pt x 1086.0575pt>
+File: ERD.png Graphic file (type png)
+<use ERD.png>
+Package pdftex.def Info: ERD.png  used on input line 16.
+(pdftex.def)             Requested size: 345.84578pt x 283.04773pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 28--29
+[]\T1/pcr/m/n/12 AvailableClasses(prof id, nim, class, course id,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--30
+[]\T1/pcr/m/n/12 CourseGrades(course id, nim, pass period,
+ []
+
 [7
 
-] [8] [9]) [10] (AssignmentTemplate.bbl
+ <./ERD.png>] [8] [9]) [10] (AssignmentTemplate.bbl
 
 Package natbib Warning: Empty `thebibliography' environment on input line 3.
 
@@ -1252,10 +1263,10 @@ Package rerunfilecheck Info: File `AssignmentTemplate.out' has not changed.
 (rerunfilecheck)             Checksum: 0E932995299834BDD085062AB3D793E2;2951.
  ) 
 Here is how much of TeX's memory you used:
- 33504 strings out of 467392
- 656088 string characters out of 5405153
+ 33510 strings out of 467392
+ 656335 string characters out of 5405153
  1402579 words of memory out of 5000000
- 62169 multiletter control sequences out of 15000+600000
+ 62175 multiletter control sequences out of 15000+600000
  688468 words of font info for 95 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
  125i,11n,122p,462b,1868s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1272,9 +1283,9 @@ appyQ/AppData/Local/Programs/MiKTeX/fonts/type1/public/tex-gyre/qbkri.pfb><C:/U
 sers/LappyQ/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrb8a.pfb><C
 :/Users/LappyQ/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb
 >
-Output written on AssignmentTemplate.pdf (15 pages, 301863 bytes).
+Output written on AssignmentTemplate.pdf (15 pages, 341939 bytes).
 PDF statistics:
- 328 PDF objects out of 1000 (max. 8388607)
+ 331 PDF objects out of 1000 (max. 8388607)
  110 named destinations out of 1000 (max. 500000)
- 154 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 159 words of extra memory for PDF output out of 10000 (max. 10000000)
 
