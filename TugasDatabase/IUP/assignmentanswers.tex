@@ -21,12 +21,12 @@ The ER diagram for the Academic Database is shown in Figure \ref{gb:1}
 \begin{tcolorbox}[title=Table Schema in the Academic Database]
 \begin{itemize}
     \itemsep0em
-     \item \texttt{student(nim, name, semester)}
-     \item \texttt{professor(prof id, name)}
-      \item \texttt{course(course id, period, type)}
+     \item \texttt{students(nim, name, semester, cohort, program)}
+     \item \texttt{professors(prof id, name)}
+      \item \texttt{courses(course name, course id, period, type, academic year)}
       \item \texttt{prerequisites(prerequisite, course id)}
-      \item \texttt{AvailableClasses(prof id, nim, class, course id, semester)}
-      \item \texttt{CourseGrades(course id, nim, pass period, credits, weight)}
+      \item \texttt{AvailableClasses(prof id, nim, class, course id, semester, academic year)}
+      \item \texttt{CourseGrades(course id, nim, academic year,completed period, credits, weight)}
      
 \end{itemize}  
 \end{tcolorbox}
