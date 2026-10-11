@@ -27,61 +27,14 @@ The ER diagram for the Academic Database is shown in Figure \ref{gb:1}
       \item \texttt{prerequisites(prerequisite, course id)}
       \item \texttt{AvailableClasses(prof id, nim, class, course id, semester, academic year)}
       \item \texttt{CourseGrades(course id, nim, academic year,completed period, credits, weight)}
-      \item \texttt{CREATE TABLE students (
-      	nim VARCHAR(20) PRIMARY KEY,
-      	name VARCHAR(100) NOT NULL,
-      	semester INT,
-      	cohort VARCHAR(20),
-      	program VARCHAR(100)
-      	);
-      	
-      	CREATE TABLE professors (
-      	prof_id VARCHAR(20) PRIMARY KEY,
-      	name VARCHAR(100) NOT NULL
-      	);
-      	
-      	CREATE TABLE courses (
-      	course_id VARCHAR(20) PRIMARY KEY,
-      	course_name VARCHAR(100) NOT NULL,
-      	period VARCHAR(20),
-      	type VARCHAR(50),
-      	academic_year VARCHAR(20)
-      	);
-      	
-      	CREATE TABLE prerequisites (
-      	prerequisite VARCHAR(20),
-      	course_id VARCHAR(20),
-      	PRIMARY KEY (prerequisite, course_id),
-      	FOREIGN KEY (prerequisite) REFERENCES courses(course_id),
-      	FOREIGN KEY (course_id) REFERENCES courses(course_id)
-      	);
-      	
-      	CREATE TABLE AvailableClasses (
-      	prof_id VARCHAR(20),
-      	nim VARCHAR(20),
-      	class VARCHAR(20),
-      	course_id VARCHAR(20),
-      	semester INT,
-      	academic_year VARCHAR(20),
-      	PRIMARY KEY (prof_id, class, course_id, semester, academic_year),
-      	FOREIGN KEY (prof_id) REFERENCES professors(prof_id),
-      	FOREIGN KEY (nim) REFERENCES students(nim),
-      	FOREIGN KEY (course_id) REFERENCES courses(course_id)
-      	);
-      	
-      	CREATE TABLE CourseGrades (
-      	course_id VARCHAR(20),
-      	nim VARCHAR(20),
-      	academic_year VARCHAR(20),
-      	completed_period VARCHAR(20),
-      	credits INT,
-      	weight DECIMAL(3, 2),
-      	PRIMARY KEY (course_id, nim, academic_year),
-      	FOREIGN KEY (course_id) REFERENCES courses(course_id),
-      	FOREIGN KEY (nim) REFERENCES students(nim)
-      	);}
-     
-\end{itemize}  
+      \centering
+      \includegraphics[width=.5\linewidth]{pic1.png}
+      \includegraphics[width=.5\linewidth]{pic2.png}
+      \label{gb:2}
+\end{itemize}
+
+
+ 
 \end{tcolorbox}
 \section{Business Questions and Solutions Using SQL}
 \subsection{Question number 1}
