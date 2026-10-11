@@ -1,12 +1,13 @@
+
 \chapter{Results and Discussion}
+
 \begin{tcolorbox}[title=Group Members]
     \begin{enumerate}
         \itemsep0em
         \item Nashwan Hafid Andayuri, 25/554944/PA/23251
-        \item Ali Zainal Abidin 25/558945/PA/23497:
-        \item Farrell Rheza Rayhandanu
-        25/554767/PA/23237:
-        \item Adriel Gerald Tomyjune Bakara 25/558778/PA/23489
+        \item Ali Zainal Abidin, 25/558945/PA/23497
+        \item Farrell Rheza Rayhandanu, 25/554767/PA/23237
+        \item Adriel Gerald Tomyjune Bakara, 25/558778/PA/23489
     \end{enumerate}
 \end{tcolorbox}
 
@@ -15,6 +16,7 @@
 \setlength{\parindent}{0pt}
 
 \section{Entity Relationship Diagram}
+
 The database uses six main tables: \texttt{students}, \texttt{professors}, \texttt{courses}, \texttt{prerequisites}, \texttt{AvailableClasses}, and \texttt{CourseGrades}. Students, professors, and courses are identified by their NIM, professor ID, and course ID.
 
 \texttt{AvailableClasses} records which class a student joins, who teaches it, and when it is taken. The records are kept after each semester so the enrollment history is not lost. The \texttt{prerequisites} table connects a course to the courses that must be completed before it.
@@ -22,6 +24,8 @@ The database uses six main tables: \texttt{students}, \texttt{professors}, \text
 \texttt{CourseGrades} stores the credits and weight received for every course attempt. A student can retake a course in another semester or academic year, and the latest attempt is used when calculating the cumulative GPA. The foreign keys connect these records to the correct student, course, and professor.
 
 \endgroup
+
+The ER diagram for the Academic Database is shown in Figure \ref{gb:1}.
 
 \begin{figure}[!h]
     \centering
@@ -31,6 +35,7 @@ The database uses six main tables: \texttt{students}, \texttt{professors}, \text
 \end{figure}
 
 \section{Schema of Tables in the Database}
+
 \begin{tcolorbox}[title=Table Schema in the Academic Database]
 \begin{itemize}
     \itemsep0em
@@ -44,6 +49,7 @@ The database uses six main tables: \texttt{students}, \texttt{professors}, \text
 \end{tcolorbox}
 
 \subsection{SQL DDL Commands}
+
 \begin{lstlisting}[breaklines=true]
 CREATE TABLE students (
     nim VARCHAR(20) PRIMARY KEY,
@@ -152,10 +158,13 @@ CREATE TABLE CourseGrades (
 \end{lstlisting}
 
 \section{Business Questions and Solutions Using SQL}
+
 \subsection{Question number 1}
+
 \begin{tcolorbox}
   \textit{List of elective course names and the courses that are their prerequisites (only name and course code information is sufficient). Courses that do not have prerequisites should still be displayed!}
 \end{tcolorbox}
+
 \begin{enumerate}
     \itemsep0em
     \item Tables needed to answer the query:
@@ -187,24 +196,45 @@ LEFT JOIN courses pre_c
 WHERE c.type = 'E'
 ORDER BY c.course_id, p.prerequisite;
     \end{lstlisting}
-   \item {Relational Algebra:}
-   \begin{align*}
-   	\tau_{c.\text{course\_id}, p.\text{prerequisite}} \Big( 
-   	& \rho_{\text{renamed}} \Big( 
-   	\pi_{\text{cols}} \Big( 
-   	(\sigma_{\text{type}=\text{'E'}}(\rho_c(\text{courses}))) \\
-   	& \quad \mathbin{\Leftouterjoin}_{c.\text{course\_id}=p.\text{course\_id}} \rho_p(\text{prerequisites}) \\
-   	& \quad \mathbin{\Leftouterjoin}_{p.\text{prerequisite}=pre\_c.\text{course\_id}} \rho_{pre\_c}(\text{courses}) 
-   	\Big) \Big) \Big)
-   \end{align*}
+
+    \item Relational Algebra:
+
+    \begin{align*}
+    E &\leftarrow
+    \sigma_{c.\text{type}='E'}
+    (\rho_c(\text{courses})) \\[4pt]
+    J_1 &\leftarrow
+    E \leftouterjoin_{
+        c.\text{course\_id}=p.\text{course\_id}
+    }
+    \rho_p(\text{prerequisites}) \\[4pt]
+    J_2 &\leftarrow
+    J_1 \leftouterjoin_{
+        p.\text{prerequisite}=\text{pre\_c.course\_id}
+    }
+    \rho_{\text{pre\_c}}(\text{courses}) \\[4pt]
+    R &\leftarrow
+    \tau_{c.\text{course\_id}\uparrow,\,
+           p.\text{prerequisite}\uparrow}
+    \Big(
+    \pi_{\substack{
+        c.\text{course\_id},
+        c.\text{course\_name},\\
+        p.\text{prerequisite},
+        \text{pre\_c.course\_name}
+    }}(J_2)
+    \Big)
+    \end{align*}
 
     \item Alternative SQL commands (if any) with adequate explanation: No alternative query.
 \end{enumerate}
 
 \subsection{Question number 2}
+
 \begin{tcolorbox}
 List of elective courses taken by Computer Science students of the '2024' cohort in the odd semester of academic year 2026/2027!
 \end{tcolorbox}
+
 \begin{enumerate}
     \itemsep0em
     \item Tables needed to answer the query:
@@ -237,25 +267,44 @@ WHERE LOWER(s.program) = 'computer science'
     AND ac.semester = 'Odd'
 ORDER BY c.course_id;
     \end{lstlisting}
-    \item {Relational Algebra:}
+
+    \item Relational Algebra:
+
     \begin{align*}
-    	\tau_{c.\text{course\_id}} \Big( & \\
-    	\pi_{c.\text{course\_id}, c.\text{course\_name}} \Big( & \\
-    	& \sigma_{\substack{\text{LOWER}(s.\text{program}) = \text{'computer science'} \\ \land\, s.\text{cohort} = \text{'2024'}}}(\rho_s(\text{students})) \\
-    	& \quad \mathbin{\bowtie}_{s.\text{nim} = ac.\text{nim}} \\
-    	& \quad \sigma_{\substack{ac.\text{academic\_year} = \text{'2026/2027'} \\ \land\, ac.\text{semester} = \text{'Odd'}}}(\rho_{ac}(\text{AvailableClasses})) \\
-    	& \quad \mathbin{\bowtie}_{ac.\text{course\_id} = c.\text{course\_id}} \\
-    	& \quad \sigma_{c.\text{type} = \text{'E'}}(\rho_c(\text{courses})) 
-    	\Big) \Big)
+    S &\leftarrow
+    \sigma_{\substack{
+        \operatorname{LOWER}(s.\text{program})
+        =\text{'computer science'}\\
+        \land\ s.\text{cohort}=\text{'2024'}
+    }}(\rho_s(\text{students})) \\[4pt]
+    A &\leftarrow
+    \sigma_{\substack{
+        \text{ac.academic\_year}=\text{'2026/2027'}\\
+        \land\ \text{ac.semester}=\text{'Odd'}
+    }}(\rho_{ac}(\text{AvailableClasses})) \\[4pt]
+    C &\leftarrow
+    \sigma_{c.\text{type}='E'}
+    (\rho_c(\text{courses})) \\[4pt]
+    J &\leftarrow
+    (S \bowtie_{s.\text{nim}=ac.\text{nim}} A)
+    \bowtie_{ac.\text{course\_id}=c.\text{course\_id}} C
+    \\[4pt]
+    R &\leftarrow
+    \tau_{c.\text{course\_id}\uparrow}
+    \Big(
+    \pi_{c.\text{course\_id},c.\text{course\_name}}(J)
+    \Big)
     \end{align*}
 
     \item Alternative SQL commands (if any) with adequate explanation: No alternative query. The semester is checked using \texttt{ac.semester} because it shows when the student took the course.
 \end{enumerate}
 
 \subsection{Question number 3}
+
 \begin{tcolorbox}
     List of favorite elective courses for Computer Science students, namely the three courses with the most enrollees in the last three years!
 \end{tcolorbox}
+
 \begin{enumerate}
     \itemsep0em
     \item Tables needed to answer the query:
@@ -293,27 +342,63 @@ GROUP BY c.course_id, c.course_name
 ORDER BY total_enrollees DESC, c.course_id
 LIMIT 3;
     \end{lstlisting}
-    \item {Relational Algebra:}
+
+    \item Relational Algebra:
+
     \begin{align*}
-    	& \tau_{\text{total\_enrollees} \downarrow,\, c.\text{course\_id},\, \text{limit}=3} \Big( \\
-    	& \quad {}_{c.\text{course\_id}, c.\text{course\_name}}\gamma_{\text{COUNT}(\text{DISTINCT } ac.\text{nim}) \rightarrow \text{total\_enrollees}} \Big( \\
-    	& \qquad \sigma_{\substack{\text{LOWER}(s.\text{program}) = \text{'computer science'} \\
-    			\land\, c.\text{type} = \text{'E'} \\
-    			\land\, \text{CAST}(\text{SUBSTRING}(ac.\text{academic\_year}, 1, 4) \text{ AS INT}) \\
-    			\ge (\text{Subquery})}} \Big( \\
-    	& \qquad \quad \rho_{ac}(\text{AvailableClasses}) \\
-    	& \qquad \quad \mathbin{\bowtie}_{ac.\text{nim} = s.\text{nim}} \rho_s(\text{students}) \\
-    	& \qquad \quad \mathbin{\bowtie}_{ac.\text{course\_id} = c.\text{course\_id}} \rho_c(\text{courses}) 
-    	\Big) \Big) \Big)
+    Y &\leftarrow
+    \gamma_{\substack{
+        \operatorname{MAX}(
+        \operatorname{startYear}(\text{academic\_year})
+        )\\
+        \rightarrow \text{latestYear}
+    }}(\text{AvailableClasses}) \\[4pt]
+    J &\leftarrow
+    \Big(
+    \rho_{ac}(\text{AvailableClasses})
+    \bowtie_{ac.\text{nim}=s.\text{nim}}
+    \rho_s(\text{students})
+    \Big) \\[-2pt]
+    &\qquad
+    \bowtie_{ac.\text{course\_id}=c.\text{course\_id}}
+    \rho_c(\text{courses}) \\[4pt]
+    F &\leftarrow
+    \sigma_{\substack{
+        \operatorname{LOWER}(s.\text{program})
+        =\text{'computer science'}\\
+        \land\ c.\text{type}='E'\\
+        \land\
+        \operatorname{startYear}
+        (ac.\text{academic\_year})
+        \ge \text{latestYear}-2
+    }}(J \times Y) \\[4pt]
+    G &\leftarrow
+    {}_{c.\text{course\_id},c.\text{course\_name}}
+    \gamma_{\substack{
+        \operatorname{COUNT}(
+        \operatorname{DISTINCT}\ ac.\text{nim}
+        )\\
+        \rightarrow \text{total\_enrollees}
+    }}(F) \\[4pt]
+    R &\leftarrow
+    \operatorname{Top}_3
+    \Big(
+    \tau_{\text{total\_enrollees}\downarrow,\,
+           c.\text{course\_id}\uparrow}(G)
+    \Big)
     \end{align*}
+
+    Here, \texttt{startYear} takes the first four digits of the academic year. The latest year is used to select the last three academic years. \(\operatorname{Top}_3\) means only the first three courses are selected after sorting.
 
     \item Alternative SQL commands (if any) with adequate explanation: No alternative query. The subquery finds the latest academic year in the table, and subtracting two includes a total of three academic years.
 \end{enumerate}
 
 \subsection{Question number 4}
+
 \begin{tcolorbox}
 List of students who have a Semester Grade Point Average for the odd semester of 2025/2026 of no less than 3.25! (understand the difference between Semester GPA and Cumulative GPA)
 \end{tcolorbox}
+
 \begin{enumerate}
     \itemsep0em
     \item Tables needed to answer the query:
@@ -342,25 +427,54 @@ GROUP BY s.nim, s.name
 HAVING SUM(cg.credits * cg.weight) / SUM(cg.credits) >= 3.25
 ORDER BY semester_gpa DESC, s.nim;
     \end{lstlisting}
-    \item {Relational Algebra:}
+
+    \item Relational Algebra:
+
     \begin{align*}
-    	& \tau_{\text{semester\_gpa} \downarrow,\, s.\text{nim}} \Big( \\
-    	& \quad \sigma_{\text{semester\_gpa} \ge 3.25} \Big( \\
-    	& \qquad {}_{s.\text{nim}, s.\text{name}}\gamma_{\text{ROUND}\left(\frac{\sum(cg.\text{credits} \cdot cg.\text{weight})}{\sum(cg.\text{credits})}, 2\right) \rightarrow \text{semester\_gpa}} \Big( \\
-    	& \qquad \quad \rho_s(\text{students}) \\
-    	& \qquad \quad \mathbin{\bowtie}_{s.\text{nim} = cg.\text{nim}} \\
-    	& \qquad \quad \sigma_{\substack{cg.\text{academic\_year} = \text{'2025/2026'} \\ \land\, cg.\text{completed\_period} = \text{'Odd'}}}(\rho_{cg}(\text{CourseGrades})) 
-    	\Big) \Big) \Big)
+    J &\leftarrow
+    \rho_s(\text{students})
+    \bowtie_{s.\text{nim}=cg.\text{nim}}
+    \sigma_{\substack{
+        cg.\text{academic\_year}=\text{'2025/2026'}\\
+        \land\
+        cg.\text{completed\_period}=\text{'Odd'}
+    }}(\rho_{cg}(\text{CourseGrades})) \\[4pt]
+    G &\leftarrow
+    {}_{s.\text{nim},s.\text{name}}
+    \gamma_{\substack{
+        \operatorname{SUM}(
+        cg.\text{credits}\cdot cg.\text{weight}
+        )\rightarrow\text{points},\\
+        \operatorname{SUM}(cg.\text{credits})
+        \rightarrow\text{totalCredits}
+    }}(J) \\[4pt]
+    F &\leftarrow
+    \sigma_{\text{points}/\text{totalCredits}\ge 3.25}
+    (G) \\[4pt]
+    R &\leftarrow
+    \tau_{\text{semester\_gpa}\downarrow,\,
+           s.\text{nim}\uparrow}
+    \Big(
+    \pi_{\substack{
+        s.\text{nim},s.\text{name},\\
+        \operatorname{ROUND}(
+        \text{points}/\text{totalCredits},2)
+        \rightarrow\text{semester\_gpa}
+    }}(F)
+    \Big)
     \end{align*}
+
+    The GPA is calculated using the course credits and grade weights. Students with a GPA of at least 3.25 are selected before the result is rounded to two decimal places.
 
     \item Alternative SQL commands (if any) with adequate explanation: No alternative query. Only grades from the odd semester of 2025/2026 are used, so the result is a Semester GPA rather than a Cumulative GPA.
 \end{enumerate}
 
-
 \subsection{Question number 5}
+
 \begin{tcolorbox}
     List of students and the Cumulative GPA they have obtained to date! (courses that have been retaken only need to be counted once)
 \end{tcolorbox}
+
 \begin{enumerate}
     \itemsep0em
     \item Tables needed to answer the query:
@@ -406,19 +520,52 @@ JOIN LatestCourseGrades lcg
 GROUP BY s.nim, s.name
 ORDER BY s.nim;
     \end{lstlisting}
-    \item {Relational Algebra:}
+
+    \item Relational Algebra:
+
     \begin{align*}
-    	& \tau_{s.\text{nim}} \Big( \\
-    	& \quad {}_{s.\text{nim}, s.\text{name}}\gamma_{\text{ROUND}\left(\frac{\sum(lcg.\text{credits} \cdot lcg.\text{weight})}{\sum(lcg.\text{credits})}, 2\right) \rightarrow \text{cumulative\_gpa}} \Big( \\
-    	& \qquad \rho_s(\text{students}) \\
-    	& \qquad \mathbin{\bowtie}_{s.\text{nim} = lcg.\text{nim}} \\
-    	& \qquad \rho_{lcg} \Big( \sigma_{\text{grade\_rank} = 1} \Big( \\
-    	& \qquad \quad \omega_{\substack{\text{grade\_rank} \leftarrow \text{ROW\_NUMBER}() \\ \text{PARTITION BY } cg.\text{nim}, cg.\text{course\_id} \\ \text{ORDER BY } cg.\text{academic\_year} \downarrow,\, \text{completed\_period} \downarrow}} \Big( \\
-    	& \qquad \qquad \sigma_{cg.\text{weight} \text{ IS NOT NULL}}(\rho_{cg}(\text{CourseGrades})) \\
-    	& \qquad \quad \Big) \\
-    	& \qquad \Big) \Big) \\
-    	& \Big) \Big)
+    C &\leftarrow
+    \sigma_{cg.\text{weight}\neq\text{NULL}}
+    (\rho_{cg}(\text{CourseGrades})) \\[4pt]
+    W &\leftarrow
+    \omega_{\substack{
+        \text{ROW\_NUMBER}()\rightarrow\text{grade\_rank}\\
+        \text{PARTITION BY }cg.\text{nim},
+        cg.\text{course\_id}\\
+        \text{ORDER BY }cg.\text{academic\_year}
+        \downarrow,\\
+        \operatorname{semesterRank}
+        (cg.\text{completed\_period})\downarrow
+    }}(C) \\[4pt]
+    L &\leftarrow
+    \rho_{lcg}(
+    \sigma_{\text{grade\_rank}=1}(W)
+    ) \\[4pt]
+    J &\leftarrow
+    \rho_s(\text{students})
+    \bowtie_{s.\text{nim}=lcg.\text{nim}}L \\[4pt]
+    G &\leftarrow
+    {}_{s.\text{nim},s.\text{name}}
+    \gamma_{\substack{
+        \operatorname{SUM}(
+        lcg.\text{credits}\cdot lcg.\text{weight}
+        )\rightarrow\text{points},\\
+        \operatorname{SUM}(lcg.\text{credits})
+        \rightarrow\text{totalCredits}
+    }}(J) \\[4pt]
+    R &\leftarrow
+    \tau_{s.\text{nim}\uparrow}
+    \Big(
+    \pi_{\substack{
+        s.\text{nim},s.\text{name},\\
+        \operatorname{ROUND}(
+        \text{points}/\text{totalCredits},2)
+        \rightarrow\text{cumulative\_gpa}
+    }}(G)
+    \Big)
     \end{align*}
+
+    Here, \texttt{semesterRank} assigns Odd = 1 and Even = 2. This makes sure the latest semester is selected first when a student retakes a course.
 
     \item Alternative SQL commands (if any) with adequate explanation: No alternative query. If a course was taken more than once, only the grade from the latest completed attempt is used. The academic year and semester are checked to find the latest attempt, so repeated courses are only counted once when calculating the Cumulative GPA.
 \end{enumerate}
