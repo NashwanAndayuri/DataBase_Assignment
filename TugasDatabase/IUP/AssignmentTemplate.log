@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.10.9)  11 OCT 2026 11:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.10.9)  11 OCT 2026 14:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1094,7 +1094,7 @@ Package pdfcol Info: New color stack `tcb@breakable' = 1 on input line 23.
 \tcb@totallowerbox=\box139
 )
 LaTeX Font Info:    Trying to load font information for T1+qbk on input line 10
-3.
+6.
 
 (C:\Users\LappyQ\AppData\Local\Programs\MiKTeX\tex/latex/tex-gyre\t1qbk.fd
 File: t1qbk.fd 2009/09/25 v1.2 font definition file for T1/qbk
@@ -1102,24 +1102,24 @@ File: t1qbk.fd 2009/09/25 v1.2 font definition file for T1/qbk
 (AssignmentTemplate.aux)
 \openout1 = `AssignmentTemplate.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 103.
-LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 106.
+LaTeX Font Info:    ... okay on input line 106.
 
 (C:\Users\LappyQ\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.m
 kii
@@ -1146,7 +1146,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring ON on input line 103.
+Package hyperref Info: Link coloring ON on input line 106.
  (AssignmentTemplate.out) (AssignmentTemplate.out)
 \@outlinefile=\write5
 \openout5 = `AssignmentTemplate.out'.
@@ -1155,12 +1155,12 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count390
-Package tocbasic Info: setting babel extension for `lol' on input line 103.
+Package tocbasic Info: setting babel extension for `lol' on input line 106.
 Package babel Info: Main language set to 'indonesian'.
-<logougm.png, id=74, 110.5731pt x 112.2594pt>
+<logougm.png, id=78, 110.5731pt x 112.2594pt>
 File: logougm.png Graphic file (type png)
 <use logougm.png>
-Package pdftex.def Info: logougm.png  used on input line 106.
+Package pdftex.def Info: logougm.png  used on input line 109.
 (pdftex.def)             Requested size: 110.57281pt x 112.25911pt.
  [1
 
@@ -1230,38 +1230,54 @@ File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 [3{C:/Users/LappyQ/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]
 [4] [5]) (assignmentanswers.tex [6]
 CHAPTER II.
-<ERD.png, id=190, 1326.9575pt x 1086.0575pt>
+<ERD.png, id=194, 1326.9575pt x 1086.0575pt>
 File: ERD.png Graphic file (type png)
 <use ERD.png>
-Package pdftex.def Info: ERD.png  used on input line 16.
+Package pdftex.def Info: ERD.png  used on input line 28.
 (pdftex.def)             Requested size: 345.84578pt x 283.04773pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 26--27
-[]\T1/pcr/m/n/12 courses(course name, course id, period, type,
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 41--42
+[]\T1/pcr/m/n/12 AvailableClasses(prof_id, nim, class, course_id,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 28--29
-[]\T1/pcr/m/n/12 AvailableClasses(prof id, nim, class, course id,
+Underfull \hbox (badness 10000) in paragraph at lines 42--43
+[]\T1/pcr/m/n/12 CourseGrades(course_id, nim, academic_year,
  []
 
-<pic1.png, id=192, 455.301pt x 367.3725pt>
-File: pic1.png Graphic file (type png)
-<use pic1.png>
-Package pdftex.def Info: pic1.png  used on input line 31.
-(pdftex.def)             Requested size: 173.10435pt x 139.67026pt.
-<pic2.png, id=193, 361.35pt x 316.7835pt>
-File: pic2.png Graphic file (type png)
-<use pic2.png>
-Package pdftex.def Info: pic2.png  used on input line 32.
-(pdftex.def)             Requested size: 173.10435pt x 151.75465pt.
 [7
 
- <./ERD.png>] [8 <./pic1.png> <./pic2.png>] [9]) [10] (AssignmentTemplate.bbl
+] [8 <./ERD.png>] [9] [10] [11] [12]
+Overfull \hbox (11.15282pt too wide) detected at line 250
+[]
+ []
+
+[13] [14]
+Overfull \hbox (8.58734pt too wide) in paragraph at lines 322--323
+[]\T1/pcr/m/n/12 CourseGrades \T1/qbk/m/n/12 (aliased as \T1/pcr/m/n/12 cg\T1/q
+bk/m/n/12 ): stores the cred-its, grade weight,
+ []
+
+[15]
+Overfull \hbox (9.31676pt too wide) in paragraph at lines 356--357
+\T1/qbk/m/n/12 al-ter-na-tive query. Only grades from the odd semester of 2025/
+2026
+ []
+
+[16]
+Overfull \hbox (18.89896pt too wide) in paragraph at lines 373--374
+[]\T1/qbk/m/n/12 Join cri-te-ria (if any): \T1/pcr/m/n/12 s.nim = lcg.nim\T1/qb
+k/m/n/12 . Only rows with \T1/pcr/m/n/12 grade_rank
+ []
+
+[17]) [18] (AssignmentTemplate.bbl
 
 Package natbib Warning: Empty `thebibliography' environment on input line 3.
 
-) [11
+) [19
 
 
 ] (AssignmentTemplate.aux)
@@ -1270,32 +1286,39 @@ LaTeX2e <2026-06-01>
 L3 programming layer <2026-09-09>
  ***********
 Package rerunfilecheck Info: File `AssignmentTemplate.out' has not changed.
-(rerunfilecheck)             Checksum: 0E932995299834BDD085062AB3D793E2;2951.
+(rerunfilecheck)             Checksum: 444557D582D90681EB90AF8403233CA2;3099.
  ) 
 Here is how much of TeX's memory you used:
- 33525 strings out of 467392
- 656549 string characters out of 5405153
- 1402579 words of memory out of 5000000
- 62190 multiletter control sequences out of 15000+600000
+ 33758 strings out of 467392
+ 659901 string characters out of 5405153
+ 1516579 words of memory out of 5000000
+ 62221 multiletter control sequences out of 15000+600000
  688468 words of font info for 95 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
- 125i,11n,122p,462b,1868s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 125i,16n,122p,462b,2196s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/LappyQ/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
 /cmex10.pfb><C:/Users/LappyQ/AppData/Local/Programs/MiKTeX/fonts/type1/public/a
-msfonts/cm/cmmi10.pfb><C:/Users/LappyQ/AppData/Local/Programs/MiKTeX/fonts/type
-1/public/amsfonts/cm/cmmi8.pfb><C:/Users/LappyQ/AppData/Local/Programs/MiKTeX/f
-onts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/LappyQ/AppData/Local/Programs
-/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/LappyQ/AppData/Local/
-Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/LappyQ/AppD
-ata/Local/Programs/MiKTeX/fonts/type1/public/tex-gyre/qbkb.pfb><C:/Users/LappyQ
-/AppData/Local/Programs/MiKTeX/fonts/type1/public/tex-gyre/qbkr.pfb><C:/Users/L
-appyQ/AppData/Local/Programs/MiKTeX/fonts/type1/public/tex-gyre/qbkri.pfb><C:/U
-sers/LappyQ/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrb8a.pfb><C
-:/Users/LappyQ/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb
->
-Output written on AssignmentTemplate.pdf (15 pages, 521629 bytes).
+msfonts/cmextra/cmex7.pfb><C:/Users/LappyQ/AppData/Local/Programs/MiKTeX/fonts/
+type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/LappyQ/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/LappyQ/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/LappyQ/AppData
+/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Lappy
+Q/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Us
+ers/LappyQ/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.p
+fb><C:/Users/LappyQ/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
+m/cmr6.pfb><C:/Users/LappyQ/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
+sfonts/cm/cmr8.pfb><C:/Users/LappyQ/AppData/Local/Programs/MiKTeX/fonts/type1/p
+ublic/amsfonts/cm/cmsy10.pfb><C:/Users/LappyQ/AppData/Local/Programs/MiKTeX/fon
+ts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/LappyQ/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/LappyQ/AppData/Local/P
+rograms/MiKTeX/fonts/type1/public/tex-gyre/qbkb.pfb><C:/Users/LappyQ/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/public/tex-gyre/qbkr.pfb><C:/Users/LappyQ/AppDa
+ta/Local/Programs/MiKTeX/fonts/type1/public/tex-gyre/qbkri.pfb><C:/Users/LappyQ
+/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrb8a.pfb><C:/Users/Lap
+pyQ/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb>
+Output written on AssignmentTemplate.pdf (23 pages, 493217 bytes).
 PDF statistics:
- 335 PDF objects out of 1000 (max. 8388607)
- 110 named destinations out of 1000 (max. 500000)
- 169 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 636 PDF objects out of 1000 (max. 8388607)
+ 312 named destinations out of 1000 (max. 500000)
+ 167 words of extra memory for PDF output out of 10000 (max. 10000000)
 

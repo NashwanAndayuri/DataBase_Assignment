@@ -187,6 +187,16 @@ LEFT JOIN courses pre_c
 WHERE c.type = 'E'
 ORDER BY c.course_id, p.prerequisite;
     \end{lstlisting}
+   \item {Relational Algebra:}
+   \begin{align*}
+   	\tau_{c.\text{course\_id}, p.\text{prerequisite}} \Big( 
+   	& \rho_{\text{renamed}} \Big( 
+   	\pi_{\text{cols}} \Big( 
+   	(\sigma_{\text{type}=\text{'E'}}(\rho_c(\text{courses}))) \\
+   	& \quad \mathbin{\Leftouterjoin}_{c.\text{course\_id}=p.\text{course\_id}} \rho_p(\text{prerequisites}) \\
+   	& \quad \mathbin{\Leftouterjoin}_{p.\text{prerequisite}=pre\_c.\text{course\_id}} \rho_{pre\_c}(\text{courses}) 
+   	\Big) \Big) \Big)
+   \end{align*}
 
     \item Alternative SQL commands (if any) with adequate explanation: No alternative query.
 \end{enumerate}
@@ -227,6 +237,17 @@ WHERE LOWER(s.program) = 'computer science'
     AND ac.semester = 'Odd'
 ORDER BY c.course_id;
     \end{lstlisting}
+    \item {Relational Algebra:}
+    \begin{align*}
+    	\tau_{c.\text{course\_id}} \Big( & \\
+    	\pi_{c.\text{course\_id}, c.\text{course\_name}} \Big( & \\
+    	& \sigma_{\substack{\text{LOWER}(s.\text{program}) = \text{'computer science'} \\ \land\, s.\text{cohort} = \text{'2024'}}}(\rho_s(\text{students})) \\
+    	& \quad \mathbin{\bowtie}_{s.\text{nim} = ac.\text{nim}} \\
+    	& \quad \sigma_{\substack{ac.\text{academic\_year} = \text{'2026/2027'} \\ \land\, ac.\text{semester} = \text{'Odd'}}}(\rho_{ac}(\text{AvailableClasses})) \\
+    	& \quad \mathbin{\bowtie}_{ac.\text{course\_id} = c.\text{course\_id}} \\
+    	& \quad \sigma_{c.\text{type} = \text{'E'}}(\rho_c(\text{courses})) 
+    	\Big) \Big)
+    \end{align*}
 
     \item Alternative SQL commands (if any) with adequate explanation: No alternative query. The semester is checked using \texttt{ac.semester} because it shows when the student took the course.
 \end{enumerate}
@@ -272,6 +293,19 @@ GROUP BY c.course_id, c.course_name
 ORDER BY total_enrollees DESC, c.course_id
 LIMIT 3;
     \end{lstlisting}
+    \item {Relational Algebra:}
+    \begin{align*}
+    	& \tau_{\text{total\_enrollees} \downarrow,\, c.\text{course\_id},\, \text{limit}=3} \Big( \\
+    	& \quad {}_{c.\text{course\_id}, c.\text{course\_name}}\gamma_{\text{COUNT}(\text{DISTINCT } ac.\text{nim}) \rightarrow \text{total\_enrollees}} \Big( \\
+    	& \qquad \sigma_{\substack{\text{LOWER}(s.\text{program}) = \text{'computer science'} \\
+    			\land\, c.\text{type} = \text{'E'} \\
+    			\land\, \text{CAST}(\text{SUBSTRING}(ac.\text{academic\_year}, 1, 4) \text{ AS INT}) \\
+    			\ge (\text{Subquery})}} \Big( \\
+    	& \qquad \quad \rho_{ac}(\text{AvailableClasses}) \\
+    	& \qquad \quad \mathbin{\bowtie}_{ac.\text{nim} = s.\text{nim}} \rho_s(\text{students}) \\
+    	& \qquad \quad \mathbin{\bowtie}_{ac.\text{course\_id} = c.\text{course\_id}} \rho_c(\text{courses}) 
+    	\Big) \Big) \Big)
+    \end{align*}
 
     \item Alternative SQL commands (if any) with adequate explanation: No alternative query. The subquery finds the latest academic year in the table, and subtracting two includes a total of three academic years.
 \end{enumerate}
@@ -308,6 +342,16 @@ GROUP BY s.nim, s.name
 HAVING SUM(cg.credits * cg.weight) / SUM(cg.credits) >= 3.25
 ORDER BY semester_gpa DESC, s.nim;
     \end{lstlisting}
+    \item {Relational Algebra:}
+    \begin{align*}
+    	& \tau_{\text{semester\_gpa} \downarrow,\, s.\text{nim}} \Big( \\
+    	& \quad \sigma_{\text{semester\_gpa} \ge 3.25} \Big( \\
+    	& \qquad {}_{s.\text{nim}, s.\text{name}}\gamma_{\text{ROUND}\left(\frac{\sum(cg.\text{credits} \cdot cg.\text{weight})}{\sum(cg.\text{credits})}, 2\right) \rightarrow \text{semester\_gpa}} \Big( \\
+    	& \qquad \quad \rho_s(\text{students}) \\
+    	& \qquad \quad \mathbin{\bowtie}_{s.\text{nim} = cg.\text{nim}} \\
+    	& \qquad \quad \sigma_{\substack{cg.\text{academic\_year} = \text{'2025/2026'} \\ \land\, cg.\text{completed\_period} = \text{'Odd'}}}(\rho_{cg}(\text{CourseGrades})) 
+    	\Big) \Big) \Big)
+    \end{align*}
 
     \item Alternative SQL commands (if any) with adequate explanation: No alternative query. Only grades from the odd semester of 2025/2026 are used, so the result is a Semester GPA rather than a Cumulative GPA.
 \end{enumerate}
@@ -362,6 +406,19 @@ JOIN LatestCourseGrades lcg
 GROUP BY s.nim, s.name
 ORDER BY s.nim;
     \end{lstlisting}
+    \item {Relational Algebra:}
+    \begin{align*}
+    	& \tau_{s.\text{nim}} \Big( \\
+    	& \quad {}_{s.\text{nim}, s.\text{name}}\gamma_{\text{ROUND}\left(\frac{\sum(lcg.\text{credits} \cdot lcg.\text{weight})}{\sum(lcg.\text{credits})}, 2\right) \rightarrow \text{cumulative\_gpa}} \Big( \\
+    	& \qquad \rho_s(\text{students}) \\
+    	& \qquad \mathbin{\bowtie}_{s.\text{nim} = lcg.\text{nim}} \\
+    	& \qquad \rho_{lcg} \Big( \sigma_{\text{grade\_rank} = 1} \Big( \\
+    	& \qquad \quad \omega_{\substack{\text{grade\_rank} \leftarrow \text{ROW\_NUMBER}() \\ \text{PARTITION BY } cg.\text{nim}, cg.\text{course\_id} \\ \text{ORDER BY } cg.\text{academic\_year} \downarrow,\, \text{completed\_period} \downarrow}} \Big( \\
+    	& \qquad \qquad \sigma_{cg.\text{weight} \text{ IS NOT NULL}}(\rho_{cg}(\text{CourseGrades})) \\
+    	& \qquad \quad \Big) \\
+    	& \qquad \Big) \Big) \\
+    	& \Big) \Big)
+    \end{align*}
 
     \item Alternative SQL commands (if any) with adequate explanation: No alternative query. If a course was taken more than once, only the grade from the latest completed attempt is used. The academic year and semester are checked to find the latest attempt, so repeated courses are only counted once when calculating the Cumulative GPA.
 \end{enumerate}
