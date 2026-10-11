@@ -8,10 +8,19 @@
     \end{enumerate}
 \end{tcolorbox}
 
-\section{Entity Relationship Diagram}
-From the analysis of the business processes and the given constraints, this section can explain several things, including: \textit{cardinality mapping}, relevant attributes and keys, etc.
+\begingroup
+\setlength{\parskip}{0.8em}
+\setlength{\parindent}{0pt}
 
-The ER diagram for the Academic Database is shown in Figure \ref{gb:1}.
+\section{Entity Relationship Diagram}
+The database uses six main tables: \texttt{students}, \texttt{professors}, \texttt{courses}, \texttt{prerequisites}, \texttt{AvailableClasses}, and \texttt{CourseGrades}. Students, professors, and courses are identified by their NIM, professor ID, and course ID.
+
+\texttt{AvailableClasses} records which class a student joins, who teaches it, and when it is taken. The records are kept after each semester so the enrollment history is not lost. The \texttt{prerequisites} table connects a course to the courses that must be completed before it.
+
+\texttt{CourseGrades} stores the credits and weight received for every course attempt. A student can retake a course in another semester or academic year, and the latest attempt is used when calculating the cumulative GPA. The foreign keys connect these records to the correct student, course, and professor.
+
+\endgroup
+
 \begin{figure}[!h]
     \centering
     \includegraphics[width=.85\linewidth]{ERD.png}
