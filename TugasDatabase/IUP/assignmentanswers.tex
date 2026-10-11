@@ -148,12 +148,36 @@ CREATE TABLE CourseGrades (
 \begin{enumerate}
     \itemsep0em
     \item Tables needed to answer the query:
-    \item Join criteria (if any)
-    \item SQL command according to the question
+    \begin{itemize}
+        \item \texttt{courses} (aliased as \texttt{c}): stores the course code, course name, and type.
+        \item \texttt{prerequisites} (aliased as \texttt{p}): stores the prerequisite course code for each course.
+        \item \texttt{courses} (aliased as \texttt{pre\_c}): used again to get the name of the prerequisite course.
+    \end{itemize}
+
+    \item Join criteria (if any):
+    \begin{itemize}
+        \item \texttt{c.course\_id = p.course\_id}
+        \item \texttt{p.prerequisite = pre\_c.course\_id}
+    \end{itemize}
+    A \texttt{LEFT JOIN} is used so elective courses without prerequisites are still shown.
+
+    \item SQL command according to the question:
     \begin{lstlisting}
-SELECT * FROM course where type='E'
+SELECT
+    c.course_id AS elective_course_code,
+    c.course_name AS elective_course_name,
+    p.prerequisite AS prerequisite_course_code,
+    pre_c.course_name AS prerequisite_course_name
+FROM courses c
+LEFT JOIN prerequisites p
+    ON c.course_id = p.course_id
+LEFT JOIN courses pre_c
+    ON p.prerequisite = pre_c.course_id
+WHERE c.type = 'E'
+ORDER BY c.course_id, p.prerequisite;
     \end{lstlisting}
-    \item Alternative SQL commands (if any) with adequate explanation
+
+    \item Alternative SQL commands (if any) with adequate explanation: No alternative query.
 \end{enumerate}
 
 \subsection{Question number 2}
@@ -163,13 +187,37 @@ List of elective courses taken by Computer Science students of the '2024' cohort
 \begin{enumerate}
     \itemsep0em
     \item Tables needed to answer the query:
-    \item Join criteria (if any)
-    \item SQL command according to the question
+    \begin{itemize}
+        \item \texttt{students} (aliased as \texttt{s}): stores student information, including their program and cohort.
+        \item \texttt{AvailableClasses} (aliased as \texttt{ac}): stores classes taken by students, including the semester and academic year.
+        \item \texttt{courses} (aliased as \texttt{c}): stores the course code, course name, and type.
+    \end{itemize}
+
+    \item Join criteria (if any):
+    \begin{itemize}
+        \item \texttt{s.nim = ac.nim}
+        \item \texttt{ac.course\_id = c.course\_id}
+    \end{itemize}
+
+    \item SQL command according to the question:
     \begin{lstlisting}
-SELECT
-    FROM
+SELECT DISTINCT
+    c.course_id,
+    c.course_name
+FROM students s
+JOIN AvailableClasses ac
+    ON s.nim = ac.nim
+JOIN courses c
+    ON ac.course_id = c.course_id
+WHERE LOWER(s.program) = 'computer science'
+    AND s.cohort = '2024'
+    AND c.type = 'E'
+    AND ac.academic_year = '2026/2027'
+    AND ac.semester = 'Odd'
+ORDER BY c.course_id;
     \end{lstlisting}
-    \item Alternative SQL commands (if any) with adequate explanation
+
+    \item Alternative SQL commands (if any) with adequate explanation: No alternative query. The semester is checked using \texttt{ac.semester} because it shows when the student took the course.
 \end{enumerate}
 
 \subsection{Question number 3}
@@ -179,13 +227,42 @@ SELECT
 \begin{enumerate}
     \itemsep0em
     \item Tables needed to answer the query:
-    \item Join criteria (if any)
-    \item SQL command according to the question
+    \begin{itemize}
+        \item \texttt{courses} (aliased as \texttt{c}): stores the course code, course name, and type.
+        \item \texttt{students} (aliased as \texttt{s}): used to select Computer Science students.
+        \item \texttt{AvailableClasses} (aliased as \texttt{ac}): stores student enrollments and their academic years.
+    \end{itemize}
+
+    \item Join criteria (if any):
+    \begin{itemize}
+        \item \texttt{ac.nim = s.nim}
+        \item \texttt{ac.course\_id = c.course\_id}
+    \end{itemize}
+
+    \item SQL command according to the question:
     \begin{lstlisting}
 SELECT
-    FROM
+    c.course_id,
+    c.course_name,
+    COUNT(DISTINCT ac.nim) AS total_enrollees
+FROM AvailableClasses ac
+JOIN students s
+    ON ac.nim = s.nim
+JOIN courses c
+    ON ac.course_id = c.course_id
+WHERE LOWER(s.program) = 'computer science'
+    AND c.type = 'E'
+    AND CAST(SUBSTRING(ac.academic_year, 1, 4) AS INT) >= (
+        SELECT
+            MAX(CAST(SUBSTRING(academic_year, 1, 4) AS INT)) - 2
+        FROM AvailableClasses
+    )
+GROUP BY c.course_id, c.course_name
+ORDER BY total_enrollees DESC, c.course_id
+LIMIT 3;
     \end{lstlisting}
-    \item Alternative SQL commands (if any) with adequate explanation
+
+    \item Alternative SQL commands (if any) with adequate explanation: No alternative query. The subquery finds the latest academic year in the table, and subtracting two includes a total of three academic years.
 \end{enumerate}
 
 \subsection{Question number 4}
@@ -195,14 +272,35 @@ List of students who have a Semester Grade Point Average for the odd semester of
 \begin{enumerate}
     \itemsep0em
     \item Tables needed to answer the query:
-    \item Join criteria (if any)
-    \item SQL command according to the question
+    \begin{itemize}
+        \item \texttt{students} (aliased as \texttt{s}): stores the student's NIM and name.
+        \item \texttt{CourseGrades} (aliased as \texttt{cg}): stores the credits, grade weight, academic year, and completed period.
+    \end{itemize}
+
+    \item Join criteria (if any): \texttt{s.nim = cg.nim}
+
+    \item SQL command according to the question:
     \begin{lstlisting}
 SELECT
-    FROM
+    s.nim,
+    s.name,
+    ROUND(
+        SUM(cg.credits * cg.weight) / SUM(cg.credits),
+        2
+    ) AS semester_gpa
+FROM students s
+JOIN CourseGrades cg
+    ON s.nim = cg.nim
+WHERE cg.academic_year = '2025/2026'
+    AND cg.completed_period = 'Odd'
+GROUP BY s.nim, s.name
+HAVING SUM(cg.credits * cg.weight) / SUM(cg.credits) >= 3.25
+ORDER BY semester_gpa DESC, s.nim;
     \end{lstlisting}
-    \item Alternative SQL commands (if any) with adequate explanation
+
+    \item Alternative SQL commands (if any) with adequate explanation: No alternative query. Only grades from the odd semester of 2025/2026 are used, so the result is a Semester GPA rather than a Cumulative GPA.
 \end{enumerate}
+
 
 \subsection{Question number 5}
 \begin{tcolorbox}
@@ -211,11 +309,48 @@ SELECT
 \begin{enumerate}
     \itemsep0em
     \item Tables needed to answer the query:
-    \item Join criteria (if any)
-    \item SQL command according to the question
+    \begin{itemize}
+        \item \texttt{students} (aliased as \texttt{s}): stores the student's NIM and name.
+        \item \texttt{CourseGrades} (aliased as \texttt{cg}): stores all course grades obtained by each student, including the academic year and semester.
+        \item \texttt{LatestCourseGrades}: selects the latest completed attempt when a student has taken the same course more than once.
+    \end{itemize}
+
+    \item Join criteria (if any): \texttt{s.nim = lcg.nim}. Only rows with \texttt{grade\_rank = 1} are used so a repeated course is counted once.
+
+    \item SQL command according to the question:
     \begin{lstlisting}
+WITH LatestCourseGrades AS (
+    SELECT
+        cg.nim,
+        cg.course_id,
+        cg.credits,
+        cg.weight,
+        ROW_NUMBER() OVER (
+            PARTITION BY cg.nim, cg.course_id
+            ORDER BY
+                cg.academic_year DESC,
+                CASE cg.completed_period
+                    WHEN 'Even' THEN 2
+                    WHEN 'Odd' THEN 1
+                END DESC
+        ) AS grade_rank
+    FROM CourseGrades cg
+    WHERE cg.weight IS NOT NULL
+)
 SELECT
-    FROM
+    s.nim,
+    s.name,
+    ROUND(
+        SUM(lcg.credits * lcg.weight) / SUM(lcg.credits),
+        2
+    ) AS cumulative_gpa
+FROM students s
+JOIN LatestCourseGrades lcg
+    ON s.nim = lcg.nim
+    AND lcg.grade_rank = 1
+GROUP BY s.nim, s.name
+ORDER BY s.nim;
     \end{lstlisting}
-    \item Alternative SQL commands (if any) with adequate explanation
+
+    \item Alternative SQL commands (if any) with adequate explanation: No alternative query. If a course was taken more than once, only the grade from the latest completed attempt is used. The academic year and semester are checked to find the latest attempt, so repeated courses are only counted once when calculating the Cumulative GPA.
 \end{enumerate}
